@@ -1,0 +1,20 @@
+{
+  "name": "@rg1115/exec",
+  "version": "0.0.1",
+  "description": "exec",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "Marvin <huo_marvin@163.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^8.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}

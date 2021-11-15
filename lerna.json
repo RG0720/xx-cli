@@ -1,0 +1,10 @@
+{
+  "packages": ["packages/*", "packages/core/*", "packages/utils/*"],
+  "version": "0.0.0",
+  "command": {
+    "publish": {
+      "registry": "https://registry.npmjs.org/",
+      "access": true
+    }
+  }
+}
