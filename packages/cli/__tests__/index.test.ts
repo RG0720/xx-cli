@@ -19,7 +19,9 @@ describe("测试初始化流程", () => {
   it("参数不正确时会抛出异常", () => {
     const { program } = cli;
     expect(program).not.toBeUndefined();
-    expect(program.description()).toMatch("一个工程化解决方案的脚手架");
+    expect(program.description()).toMatch(
+      "A scaffolding for an engineered solution"
+    );
     program.exitOverride().configureOutput({
       writeErr: () => {},
     });
