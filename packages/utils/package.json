@@ -7,6 +7,7 @@
   "typings": "",
   "scripts": {
     "start": "tsc --watch -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
     "start:debug": "tsc --watch --sourcemap"
   },
   "keywords": [],
