@@ -1,0 +1,22 @@
+{
+  "name": "@rg1115/utils",
+  "version": "0.0.1",
+  "description": "utils",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "",
+  "scripts": {
+    "start": "tsc --watch -p tsconfig.json",
+    "start:debug": "tsc --watch --sourcemap"
+  },
+  "keywords": [],
+  "author": "Marvin <huo_marvin@163.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "colors": "^1.4.0"
+  }
+}

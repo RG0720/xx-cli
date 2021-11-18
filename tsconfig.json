@@ -1,10 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "lib": ["ES2015", "DOM"],
+    "target": "ES5",
+    "declaration": true,
+    "module": "commonJS",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
     "strict": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "allowJs": true
+  },
+  "exclude": [
+    "node_modules",
+    "*/**/dist",
+    "coverage",
+    "*/**/bin",
+    "**/*.spec.ts",
+    "**/*/__tests__"
+  ]
 }

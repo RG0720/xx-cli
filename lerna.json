@@ -1,14 +1,13 @@
 {
-  "packages": [
-    "packages/*",
-    "packages/core/*",
-    "packages/utils/*"
-  ],
+  "packages": ["packages/*"],
   "version": "0.0.1",
   "command": {
     "publish": {
       "registry": "https://registry.npmjs.org/",
       "access": true
+    },
+    "bootstrap": {
+      "hoist": true
     }
   }
 }

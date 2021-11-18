@@ -1,0 +1,24 @@
+{
+  "name": "@rg1115/commands",
+  "version": "0.0.1",
+  "description": "commands",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsc --watch",
+    "start:debug": "tsc --watch --sourcemap"
+  },
+  "keywords": [],
+  "author": "Marvin <huo_marvin@163.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@rg1115/models": "0.0.1",
+    "@rg1115/utils": "0.0.1",
+    "@types/fs-extra": "^9.0.13",
+    "colors": "^1.4.0",
+    "commander": "^8.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
