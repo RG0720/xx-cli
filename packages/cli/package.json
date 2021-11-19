@@ -1,6 +1,6 @@
 {
   "name": "@rg1115/cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "cli",
   "main": "index.js",
   "bin": {
@@ -15,9 +15,9 @@
   "author": "Marvin <huo_marvin@163.com>",
   "license": "MIT",
   "dependencies": {
-    "@rg1115/commands": "^0.0.3",
-    "@rg1115/models": "^0.0.3",
-    "@rg1115/utils": "^0.0.3",
+    "@rg1115/commands": "^0.0.4",
+    "@rg1115/models": "^0.0.4",
+    "@rg1115/utils": "^0.0.4",
     "@types/fs-extra": "^9.0.13",
     "@types/semver": "^7.3.9",
     "colors": "^1.4.0",
