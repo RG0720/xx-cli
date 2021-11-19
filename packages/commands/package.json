@@ -14,12 +14,10 @@
   "license": "MIT",
   "dependencies": {
     "@rg1115/models": "^0.0.2",
-    "@rg1115/utils": "^0.0.2",
-    "@types/fs-extra": "^9.0.13",
-    "colors": "^1.4.0",
-    "commander": "^8.3.0"
+    "@rg1115/utils": "^0.0.2"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.3",
     "typescript": "^4.4.4"
   }
 }

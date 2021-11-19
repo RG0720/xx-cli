@@ -1,19 +1,19 @@
-import { XXCli } from "../src";
-import { program } from "commander";
+import { XXCli } from '../src';
+import { program } from 'commander';
 
-let pkg = {
-  version: "0.0.1",
+const pkg = {
+  version: '0.0.1',
   bin: {
-    xx: "xxpath",
+    xx: 'xxpath',
   },
 };
 
-it("test can load env configuration file normally", async () => {
+it('test can load env configuration file normally', async () => {
   const cli = new XXCli(program, pkg);
-  jest.spyOn(cli, "prepare").mockImplementation(() => {
-    throw new Error("prepare");
+  jest.spyOn(cli, 'prepare').mockImplementation(() => {
+    throw new Error('prepare');
   });
-  const logErrorFn = jest.spyOn(cli, "logError");
+  const logErrorFn = jest.spyOn(cli, 'logError');
   await cli.run();
   expect(logErrorFn).toHaveBeenCalledTimes(1);
 });

@@ -1,15 +1,15 @@
-import { Loggable } from "./Loggable";
-import { homedir } from "os";
-import { env } from "process";
-import { resolve, join } from "path";
-import { writeFileSync } from "fs";
-import { Command } from "commander";
-import rootCheck from "root-check";
-import pathExists from "path-exists";
-import { events } from "@rg1115/utils";
-import { CLI_DEFAULT_HOME, CLI_ENV_FILE_NAME } from "@rg1115/models";
-import { initExec } from "@rg1115/commands";
-import dotEnv from "dotenv";
+import { Loggable } from './Loggable';
+import { homedir } from 'os';
+import { env } from 'process';
+import { resolve, join } from 'path';
+import { writeFileSync } from 'fs';
+import { Command } from 'commander';
+import rootCheck from 'root-check';
+import pathExists from 'path-exists';
+import { events } from '@rg1115/utils';
+import { CLI_DEFAULT_HOME, CLI_ENV_FILE_NAME } from '@rg1115/models';
+import { initExec } from '@rg1115/commands';
+import dotEnv from 'dotenv';
 
 export interface PkgInterface {
   version: string;
@@ -33,7 +33,7 @@ export class XXCli extends Loggable {
   }
 
   noticeCurrentVersion() {
-    this.logNotice("current cli version is", this.pkg.version);
+    this.logNotice('current cli version is', this.pkg.version);
   }
 
   rootDowngrading() {
@@ -51,26 +51,26 @@ export class XXCli extends Loggable {
     const { program, pkg } = this;
     program
       .name(Object.keys(pkg.bin)[0])
-      .usage("<command> [options]")
-      .option("-d, --debug", "Whether to enable debugging mode", false)
-      .option("-l, --local <local>", "Specify the local debug file path", "")
-      .description("A scaffolding for an engineered solution")
+      .usage('<command> [options]')
+      .option('-d, --debug', 'Whether to enable debugging mode', false)
+      .option('-l, --local <local>', 'Specify the local debug file path', '')
+      .description('A scaffolding for an engineered solution')
       .version(pkg.version);
 
     program
-      .command("init")
-      .option("-f, --force", "Whether to force initialization", false)
-      .description("Initialize a project")
+      .command('init')
+      .option('-f, --force', 'Whether to force initialization', false)
+      .description('Initialize a project')
       .action(initExec);
 
     // listening to options, if debug is true, change the log level
-    program.on("option:debug", function () {
+    program.on('option:debug', function () {
       if (program.opts().debug) {
-        events.emit("LOG_LEVEL_CHANGE", "verbose");
+        events.emit('LOG_LEVEL_CHANGE', 'verbose');
       }
     });
 
-    program.on("option:local", function () {
+    program.on('option:local', function () {
       env.CLI_LOCAL = program.opts().local;
     });
   }
@@ -88,11 +88,11 @@ export class XXCli extends Loggable {
       dotEnv.config({ path: dotenvPath });
     } else {
       // create demo file
-      writeFileSync(dotenvPath, "KEY=VALUE");
+      writeFileSync(dotenvPath, 'KEY=VALUE');
     }
     this.createDefaultConfig();
-    events.emit("CLI_BASEURL_CHANGE", env.XHH_CLI_BASE_URL);
-    this.logVerbose("env config", JSON.stringify(env));
+    events.emit('CLI_BASEURL_CHANGE', env.XHH_CLI_BASE_URL);
+    this.logVerbose('env config', JSON.stringify(env));
   }
 
   createDefaultConfig() {
@@ -115,7 +115,7 @@ export class XXCli extends Loggable {
       await this.prepare();
       await this.registerCommand();
     } catch (e) {
-      this.logError("xx cli run throw error", String(e));
+      this.logError('xx cli run throw error', String(e));
     }
   }
 }
