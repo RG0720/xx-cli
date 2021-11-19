@@ -1,6 +1,6 @@
 {
   "name": "@rg1115/models",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
   "author": "Marvin <huo_marvin@163.com>",
   "license": "MIT",
   "dependencies": {
-    "@rg1115/utils": "^0.0.2"
+    "@rg1115/utils": "^0.0.3"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
