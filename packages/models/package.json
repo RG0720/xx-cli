@@ -1,6 +1,6 @@
 {
   "name": "@rg1115/models",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
   "author": "Marvin <huo_marvin@163.com>",
   "license": "MIT",
   "dependencies": {
-    "@rg1115/utils": "^0.0.1",
+    "@rg1115/utils": "^0.0.2",
     "@types/fs-extra": "^9.0.13",
     "colors": "^1.4.0",
     "commander": "^8.3.0"
