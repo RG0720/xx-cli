@@ -9,14 +9,13 @@
     "moduleResolution": "Node",
     "strict": true,
     "skipLibCheck": true,
-    "allowJs": true
+    "allowJs": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "exclude": [
-    "node_modules",
-    "*/**/dist",
-    "coverage",
-    "*/**/bin",
-    "**/*.spec.ts",
-    "**/*/__tests__"
-  ]
+  "include": ["src", "typings.d.ts"],
+  "exclude": ["dist"]
 }
