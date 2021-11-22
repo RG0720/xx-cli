@@ -2,7 +2,7 @@
 
 `xx-cli` is a scaffolding solution that includes project initialization, Git integration, ONE-click deployment of OSS and CDN.
 
-
+[![CI](https://github.com/RG0720/xx-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/RG0720/xx-cli/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/RG0720/xx-cli/branch/main/graph/badge.svg?token=BZQAP7HHWW)](https://codecov.io/gh/RG0720/xx-cli)![GitHub](https://img.shields.io/github/license/rg0720/xx-cli)
 
 ## Why?
