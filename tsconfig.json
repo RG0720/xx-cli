@@ -10,12 +10,13 @@
     "strict": true,
     "skipLibCheck": true,
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./*"]
     }
   },
-  "include": ["src", "typings.d.ts"],
+  "include": ["src", "test", "typings.d.ts", "./node_modules/execa"],
   "exclude": ["dist"]
 }

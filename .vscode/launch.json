@@ -11,9 +11,9 @@
         "-r",
         "tsconfig-paths/register",
         "./src/cli/index.ts",
-        "--help"
+        "init"
       ],
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}"
       // "protocal": "insepector"
     }
   ]

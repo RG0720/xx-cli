@@ -1,5 +1,4 @@
 // "path-exists", "root-check"
-const es6Modules: string[] = [];
 
 export default {
   clearMocks: true,
@@ -9,15 +8,17 @@ export default {
   },
   // roots: ['<rootDir>'],
   collectCoverageFrom: ['src/**/*.{ts,js,tsx,jsx}', '!src/bin/*.js'],
-  // 配置有些包的源码是使用es6模块da
+  // 配置有些包的源码是使用es6模块
   transformIgnorePatterns: [
-    ...es6Modules.map((item) => `<rootDir>/node_modules/(?!${item})`),
+    // ...es6Modules.map((item) => `<rootDir>/node_modules/(?!${item})`),
+    '<rootDir>/node_modules/(?!execa)',
   ],
   moduleFileExtensions: ['js', 'json', 'ts'],
   testRegex: '.*\\.test\\.ts$',
-  transform: {
-    '^.+\\.(t|j)s$': 'ts-jest',
-  },
+  // transform: {
+  //   '^.+\\.(t|j)s$': 'ts-jest',
+  // },
+  preset: 'ts-jest',
   coverageDirectory: './coverage',
   testEnvironment: 'node',
 };
