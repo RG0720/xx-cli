@@ -9,6 +9,7 @@ import { events, Loggable } from '@/utils';
 import { CLI_DEFAULT_HOME, CLI_ENV_FILE_NAME } from '@/models';
 import { initExec, createExec } from '@/commands';
 import dotEnv from 'dotenv';
+import { RemoteCommand, execute } from './exec';
 
 export interface PkgInterface {
   version: string;
@@ -76,7 +77,38 @@ export class XXCli extends Loggable {
     });
   }
 
-  async registerRemote() {}
+  async registerRemote() {
+    const { program } = this;
+    const SETTINGS: { [name: string]: string } = {};
+    const commands: RemoteCommand[] = [
+      {
+        command: 'kill',
+        commandContent: 'kill <port>',
+        description: 'Kills the port number of the corresponding process',
+        packageName: '@xhh-cli-dev/kill',
+        packageVersion: 'latest',
+        options: [],
+      },
+    ];
+
+    commands.forEach((command) => {
+      SETTINGS[command.command] = command.packageName;
+    });
+
+    commands.forEach((command) => {
+      const { commandContent, options = [], description } = command;
+      const subCommnad = program.command(commandContent);
+      description && subCommnad.description(description);
+      options.forEach((option) => {
+        subCommnad.option(
+          option.flags,
+          option.description,
+          option.defaultValue,
+        );
+      });
+      subCommnad.action(execute(command));
+    });
+  }
 
   envFileExists(dotenvPath: string) {
     return pathExists.sync(dotenvPath);
@@ -89,7 +121,7 @@ export class XXCli extends Loggable {
       dotEnv.config({ path: dotenvPath });
     } else {
       // create demo file
-      writeFileSync(dotenvPath, 'KEY=VALUE');
+      writeFileSync(dotenvPath, 'CLI_DEFAULT_HOME=.xx-cli');
     }
     this.createDefaultConfig();
     events.emit('CLI_BASEURL_CHANGE', env.XHH_CLI_BASE_URL);
@@ -115,8 +147,8 @@ export class XXCli extends Loggable {
       await this.registerCommand();
       await this.checkGlobalUpdate();
     } catch (e) {
-      //   console.log(e);
       this.logError('xx cli run throw error', String(e));
+      process.env.CONSOLE_ERROR && console.log(e);
     }
   }
 }

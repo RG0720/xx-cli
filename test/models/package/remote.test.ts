@@ -54,9 +54,9 @@ describe('test remote package, test remote data', () => {
     expect(pathExistsSync(resolve(sourceDir, 'package.json'))).toBeTruthy();
     await rp.install();
   });
-  // afterAll(() => {
-  //   rmdirSync(sourceDir, { recursive: true });
-  // });
+  afterAll(() => {
+    rmdirSync(sourceDir, { recursive: true });
+  });
 
   it('test catch package info', async function () {
     const pkgInfo = await rp.loadPkgInfo();

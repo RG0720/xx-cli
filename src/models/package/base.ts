@@ -1,10 +1,9 @@
 import { Loggable } from '@/utils';
 import { pathExistsSync, readJsonSync } from 'fs-extra';
 import { join } from 'path';
+import execa from 'execa';
 
 export interface PackageProps {
-  name: string;
-  version: string;
   storageDir: string;
 }
 
@@ -16,16 +15,12 @@ export interface PackageMethods {
 export type PackageInterface = PackageMethods & PackageProps;
 
 export class Package extends Loggable implements PackageInterface {
-  name: string;
-  version: string;
   storageDir: string;
   loadExecFile: boolean = false;
   execFilePath: string = '';
   constructor(options: PackageProps) {
     super();
-    const { name, version, storageDir } = options;
-    this.name = name;
-    this.version = version || 'latest';
+    const { storageDir } = options;
     this.storageDir = storageDir;
   }
 
@@ -63,5 +58,22 @@ export class Package extends Loggable implements PackageInterface {
     return this.execFilePath;
   }
 
-  execFile() {}
+  async execFile(args?: unknown) {
+    const execFilePath = await this.getExecFilePath();
+    const code = `require('${execFilePath}').call(null,${JSON.stringify(
+      args,
+    )})`;
+    const child = execa('node', ['-e', code], {
+      cwd: process.cwd(),
+      stdio: 'inherit',
+    });
+    child.on('error', (error: unknown) => {
+      this.logError('exec error', String(error));
+      process.exit(1);
+    });
+    child.on('exit', (e: number) => {
+      this.logVerbose('命令执行成功', String(e));
+      process.exit(e);
+    });
+  }
 }

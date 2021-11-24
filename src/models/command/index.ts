@@ -22,18 +22,18 @@ export class Command<T> extends Loggable {
     }
   }
 
-  init() {
+  protected async init(options?: unknown) {
     throw new Error('init method must be implemented by sub class');
   }
 
-  exec() {
+  protected async exec() {
     throw new Error('exec method must be implemented by sub class');
   }
 
-  do(): boolean | undefined {
+  async do(options?: unknown): Promise<boolean | undefined> {
     this.checkExecEnv();
-    this.init();
-    this.exec();
+    await this.init(options);
+    await this.exec();
     return true;
   }
 }

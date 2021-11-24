@@ -17,6 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["src", "test", "typings.d.ts", "./node_modules/execa"],
+  "include": ["src", "test", "typings.d.ts"],
   "exclude": ["dist"]
 }

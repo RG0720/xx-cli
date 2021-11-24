@@ -2,7 +2,7 @@
   "name": "@rg1115/cli",
   "version": "0.0.5",
   "scripts": {
-    "start": "tsc --watch",
+    "start": "tsc --watch --project tsconfig-build.json",
     "test": "jest",
     "test:dev": "jest --watch",
     "test:cov": "jest --coverage",

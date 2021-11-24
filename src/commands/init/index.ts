@@ -9,13 +9,13 @@ interface CreateCommandParam {
 }
 
 export class InitCommand extends Command<InitCommandParam> {
-  init() {}
-  exec() {}
+  protected async init() {}
+  protected async exec() {}
 }
 
 export class CreateCommand extends Command<CreateCommandParam> {
-  init() {}
-  exec() {}
+  protected async init() {}
+  protected async exec() {}
 }
 
 export const initExec = (...params: [InitCommandParam, any[]]) => {

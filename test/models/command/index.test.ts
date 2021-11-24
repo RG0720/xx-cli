@@ -1,40 +1,50 @@
 import { Command } from '@/models';
 class InitCommand extends Command<string> {}
 
+class InitCommandInit extends Command<string> {
+  async init() {}
+}
+
 class InitImpl extends Command<string> {
-  init() {}
-  exec() {}
+  async init() {}
+  async exec() {}
 }
 
 describe('test Command Initialize', () => {
-  it("when init method didn't be implemented, throw error", () => {
+  it("when init method didn't be implemented, throw error", async () => {
     const init = new InitCommand('');
-    expect(init.init).toThrow();
+    await init.do().catch((e) => {
+      expect(e instanceof Error).toBeTruthy();
+    });
   });
 
-  it("when exec method didn't be implemented, throw error", () => {
-    const init = new InitCommand('');
-    expect(init.exec).toThrow();
+  it("when exec method didn't be implemented, throw error", async () => {
+    const init = new InitCommandInit('');
+    await init.do().catch((e) => {
+      expect(e instanceof Error).toBeTruthy();
+    });
   });
 
-  it('when node version check failed, throw error', () => {
+  it('when node version check failed, throw error', async () => {
     const init = new InitImpl('');
     jest.spyOn(init, 'checkNodeVersion').mockImplementation(() => {
-      throw new Error();
+      throw new Error('node version not matched');
     });
     expect(init.checkNodeVersion).toThrowError();
-    expect(init.do).toThrow();
+    await init.do().catch((e) => {
+      expect(e instanceof Error).toBeTruthy();
+    });
   });
 
-  it('when node version check success, run normally', () => {
+  it('when node version check success, run normally', async () => {
     const init = new InitImpl('');
     jest.spyOn(init, 'checkExecEnv').mockImplementation(() => true);
     const initFun = jest.spyOn(init, 'init');
     const execFun = jest.spyOn(init, 'exec');
-    expect(init.checkExecEnv()).toBeTruthy();
-    expect(init.do()).toBeTruthy();
-    expect(initFun).toBeCalledTimes(1);
-    expect(execFun).toBeCalledTimes(1);
+    await init.do().then(() => {
+      expect(initFun).toBeCalledTimes(1);
+      expect(execFun).toBeCalledTimes(1);
+    });
   });
 
   it('when node version less then develop version, it will throw an error', () => {

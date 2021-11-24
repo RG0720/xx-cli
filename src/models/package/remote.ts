@@ -11,14 +11,21 @@ export enum RemoteType {
 
 export interface RemotePackageProps extends PackageProps {
   remoteType?: RemoteType;
+  name: string;
+  version: string;
 }
 
 export class RemotePackage extends Package {
+  name: string;
+  version: string;
   queryPath: string;
   remoteType: RemoteType = RemoteType.NPM_PACKAGE;
   finalPkgPath: string = '';
   constructor(options: RemotePackageProps) {
     super(options);
+    const { name, version } = options;
+    this.name = name;
+    this.version = version || 'latest';
     if (options.remoteType) {
       this.remoteType = options.remoteType;
     }
@@ -50,9 +57,8 @@ export class RemotePackage extends Package {
   }
 
   async exists() {
-    const pkgFullPath = await this.getFinalPkgPath();
     const sourceDir = await this.getSourceDir();
-    return pathExistsSync(join(sourceDir, pkgFullPath));
+    return pathExistsSync(sourceDir);
   }
 
   loadPkgInfo() {
