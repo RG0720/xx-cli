@@ -2,6 +2,7 @@ import { Package, RemotePackage } from '@/models/package';
 import { LocalPackage } from '@/models/package/local';
 import { RemoteCommandExec } from './remote';
 import { LocalCommandExec } from './local';
+import { log } from '@/utils/log';
 
 export interface CommandOptions {
   flags: string;
@@ -30,7 +31,7 @@ export const execute = function (command: RemoteCommand) {
       pkg = new LocalPackage({
         storageDir: process.env.CLI_LOCAL,
       });
-      execIns = new LocalCommandExec(params);
+      execIns = new LocalCommandExec(params, log);
       await execIns?.do(pkg);
     } else {
       pkg = new RemotePackage({
@@ -38,7 +39,7 @@ export const execute = function (command: RemoteCommand) {
         version: command.packageVersion,
         storageDir: process.env.CLI_HOME_PATH,
       });
-      execIns = new RemoteCommandExec(params);
+      execIns = new RemoteCommandExec(params, log);
       await execIns?.do(pkg);
     }
   };
