@@ -10,6 +10,7 @@ import { CLI_DEFAULT_HOME, CLI_ENV_FILE_NAME } from '@/models';
 import { initExec, createExec } from '@/commands';
 import dotEnv from 'dotenv';
 import { RemoteCommand, execute } from './exec';
+import { commitExec } from '@/commands/commit';
 
 export interface PkgInterface {
   version: string;
@@ -36,7 +37,9 @@ export class XXCli extends Loggable {
     rootCheck();
   }
 
-  async checkGlobalUpdate() {}
+  async checkGlobalUpdate() {
+    // TODO:
+  }
 
   async registerCommand() {
     this.registerLocal();
@@ -64,6 +67,15 @@ export class XXCli extends Loggable {
       .option('-f, --force', 'Whether to force initialization', false)
       .description('Create a project')
       .action(createExec);
+
+    program
+      .command('commit')
+      .option('-rs, --resetServer', 'reset git server', false)
+      .option('-rt, --resetToken', 'reset git token', false)
+      .option('-rO, --resetOwner', 'reset owner info', false)
+      .option('-p, --production', 'add release and publish', false)
+      .description('handle git flow')
+      .action(commitExec);
 
     // listening to options, if debug is true, change the log level
     program.on('option:debug', function () {

@@ -20,7 +20,7 @@ export class RemotePackage extends Package {
   version: string;
   queryPath: string;
   remoteType: RemoteType = RemoteType.NPM_PACKAGE;
-  finalPkgPath: string = '';
+  finalPkgPath = '';
   constructor(options: RemotePackageProps) {
     super(options);
     const { name, version } = options;

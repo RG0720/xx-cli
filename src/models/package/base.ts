@@ -16,8 +16,8 @@ export type PackageInterface = PackageMethods & PackageProps;
 
 export class Package extends Loggable implements PackageInterface {
   storageDir: string;
-  loadExecFile: boolean = false;
-  execFilePath: string = '';
+  loadExecFile = false;
+  execFilePath = '';
   constructor(options: PackageProps) {
     super();
     const { storageDir } = options;
