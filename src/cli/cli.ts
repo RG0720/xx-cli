@@ -70,9 +70,10 @@ export class XXCli extends Loggable {
 
     program
       .command('commit')
-      .option('-rs, --resetServer', 'reset git server')
-      .option('-rt, --resetToken', 'reset git token')
-      .option('-rO, --resetOwner', 'reset owner info')
+      .option('-rs, --resetServer', 'reset git server', false)
+      .option('-rt, --resetToken', 'reset git token', false)
+      .option('-rO, --resetOwner', 'reset owner info', false)
+      .option('-p, --production', 'add release and publish', false)
       .description('handle git flow')
       .action(commitExec);
 

@@ -27,6 +27,7 @@ interface CommitCommandParam {
   resetServer: boolean;
   resetToken: boolean;
   resetOwner: boolean;
+  production: boolean;
 }
 
 export enum RepoEnum {
@@ -476,7 +477,20 @@ export class CommitCommand extends Command<CommitCommandParam> {
       if (!(await this.initCommit())) {
         await this.pushRemoteRepo(this.branch);
       }
+      if (this.argv.production) {
+        await this.addAndPushTag();
+      }
     }
+  }
+
+  async addAndPushTag() {
+    const tagName = `release/${this.version}`;
+    await this.git.addTag(tagName);
+    this.log.info('addAndPushTag', `创建Tag版本${tagName}成功`);
+    await this.git.mergeFromTo(this.branch, 'main');
+    this.log.info('addAndPushTag', `将${this.branch}分支合并到主分支`);
+    await this.git.push('origin', tagName);
+    this.log.info('addAndPushTag', `向远端推送${tagName}成功`);
   }
 
   async whetherContinue() {
