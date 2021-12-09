@@ -1,6 +1,10 @@
 import { Loggable } from '@/utils';
 import { pathExistsSync, readJsonSync } from 'fs-extra';
 import { join } from 'path';
+import { resolve } from 'path';
+import path from 'path';
+import ejs from 'ejs';
+import fs from 'fs-extra';
 import execa from 'execa';
 
 export interface PackageProps {
@@ -74,6 +78,42 @@ export class Package extends Loggable implements PackageInterface {
     child.on('exit', (e: number) => {
       this.logVerbose('命令执行成功', String(e));
       process.exit(e);
+    });
+  }
+
+  async loadLocalPkgInfo() {
+    let dir = resolve(this.storageDir, 'package.json')
+    return fs.readFileSync(dir, 'utf-8')
+  }
+
+  renderEjs(targetDir: string, projectInfo: any) {
+    return new Promise((resolve, reject) => {
+      require("glob")(
+        "**",
+        {
+          cwd: targetDir,
+          ignore: ["node_modules/**"],
+          // ignore: options.ignore || "",
+          nodir: true,
+        },
+        (err, files) => {
+          if (err) reject(err);
+          Promise.all(
+            files.map((file) => {
+              const filePath = path.resolve(targetDir, file);
+              return new Promise<void>((resolve, reject) => {
+                ejs.renderFile(filePath, projectInfo, {}, (err, result) => {
+                  if (err) reject(err);
+                  fs.writeFileSync(filePath, result);
+                  resolve();
+                });
+              });
+            })
+          )
+          .then(resolve)
+          .catch(reject);
+        }
+      );
     });
   }
 }

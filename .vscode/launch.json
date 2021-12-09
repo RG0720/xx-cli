@@ -13,8 +13,8 @@
         "./src/cli/index.ts",
         "commit"
       ],
-      "cwd": "${workspaceFolder}"
-      // "protocal": "insepector"
+      "cwd": "${workspaceFolder}",
+      "protocal": "insepector"
     }
   ]
 }

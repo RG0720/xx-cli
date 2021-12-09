@@ -57,13 +57,15 @@ export class XXCli extends Loggable {
       .version(pkg.version);
 
     program
-      .command('init')
+      .command('init <project-name>')
       .option('-f, --force', 'Whether to force initialization', false)
+      // .option('-t <template-name>, --template', 'Remote Template Name')
+      .option('-tp <template-dir>, --template-position', 'Local Template Name')
       .description('Initialize a project')
       .action(initExec);
-
-    program
-      .command('create')
+      
+      program
+      .command('create <project-name>')
       .option('-f, --force', 'Whether to force initialization', false)
       .description('Create a project')
       .action(createExec);
